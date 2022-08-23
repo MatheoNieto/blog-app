@@ -9,7 +9,8 @@ type Author = {
 type Article = {
   id: string;
   title: string;
-  date_created: Date;
+  description: string;
+  date_created: string;
   times_read: number;
   author: Author;
 }

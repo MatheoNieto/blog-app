@@ -1,8 +1,16 @@
 import type {NextPage} from 'next';
-import {Typography, AppBar, Container, Box} from '@mui/material';
+import {Typography, AppBar, Box, Grid} from '@mui/material';
 import {makeStyles} from './Home.styles';
+import {Card} from './components/Card';
+import {data} from './mock/articles';
 
 const Home: NextPage = () => {
+  const renderArticles = () => {
+    return data.map((article, index) => (
+      <Card key={`${article.id}-${index}`} article={article} />
+    ));
+  };
+
   return (
     <>
       <AppBar component="nav">
@@ -12,7 +20,9 @@ const Home: NextPage = () => {
           </Typography>
         </Box>
       </AppBar>
-      <Box component="main" sx={{p: 3}}></Box>
+      <Box component="div" sx={makeStyles.contentBody}>
+        <Grid container> {renderArticles()}</Grid>
+      </Box>
     </>
   );
 };
