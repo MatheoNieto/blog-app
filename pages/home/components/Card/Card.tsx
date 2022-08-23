@@ -1,4 +1,4 @@
-import type {NextPage} from 'next';
+import React, {FC} from 'react';
 import {CardProps} from './Card.types';
 
 import {
@@ -14,7 +14,7 @@ import {
 import {makeStyles} from './Card.styles';
 import Link from 'next/link';
 
-const CardComponent: NextPage<CardProps> = ({article}) => {
+const CardComponent: FC<CardProps> = ({article}) => {
   return (
     <Card sx={makeStyles.container}>
       <Link href={`/article/${article.id}`}>

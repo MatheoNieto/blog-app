@@ -1,8 +1,9 @@
 import type {NextPage} from 'next';
-import {Typography, AppBar, Box, Grid} from '@mui/material';
+import {Box, Grid} from '@mui/material';
 import {makeStyles} from './Home.styles';
 import {Card} from './components/Card';
 import {data} from './mock/articles';
+import {Header} from '../../components/Header';
 
 const Home: NextPage = () => {
   const renderArticles = () => {
@@ -13,13 +14,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <AppBar component="nav">
-        <Box sx={makeStyles.contentHeader}>
-          <Typography variant="h6" component="div" sx={makeStyles.titleHeader}>
-            Welcome to favorite blog
-          </Typography>
-        </Box>
-      </AppBar>
+      <Header title="Welcome to favorite blog" createPost={true} />
       <Box component="div" sx={makeStyles.contentBody}>
         <Grid container> {renderArticles()}</Grid>
       </Box>
