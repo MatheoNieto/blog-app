@@ -1,51 +1,43 @@
 import React, {FC} from 'react';
-import {CardProps} from './Card.types';
 
 import {
   Typography,
   Card,
   CardActionArea,
   CardContent,
-  Box,
   Grid,
-  Avatar,
   Divider,
 } from '@mui/material';
 import {makeStyles} from './Card.styles';
 import Link from 'next/link';
+import {Posts} from '../../../../models';
+
+type CardProps = {
+  article: Posts;
+};
 
 const CardComponent: FC<CardProps> = ({article}) => {
-  return (
-    <Card sx={makeStyles.container}>
-      <Link href={`/article/${article.id}`}>
-        <CardActionArea>
-          <CardContent>
-            <Grid container sx={makeStyles.infoAuthor}>
-              <Avatar
-                alt={article.author.name}
-                src={article.author.imageProfile}
-                sx={makeStyles.imageAuthor}
-              />
-              <Typography>
-                {`${article.author.name} ${article.author.lastName}`}
-              </Typography>
-            </Grid>
-            <Divider />
-            <Typography gutterBottom variant="h5" component="div">
-              {article.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {article.description}
-            </Typography>
+  const renderPosts = () => {
+    return article.posts.map((post, index) => (
+      <Card key={`${post.id}-${index}`} sx={makeStyles.container}>
+        <Link href={`/article/${post.id}`}>
+          <CardActionArea>
+            <CardContent>
+              <Typography sx={makeStyles.titlePost}>{post.title}</Typography>
+              <Divider />
+              <Typography sx={makeStyles.infoPost}>{post.body}</Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
+      </Card>
+    ));
+  };
 
-            <Grid container sx={makeStyles.infoArticle}>
-              <Typography>Read: {article.times_read}</Typography>
-              <Typography>Date: {article.date_created}</Typography>
-            </Grid>
-          </CardContent>
-        </CardActionArea>
-      </Link>
-    </Card>
+  return (
+    <>
+      <Divider>{`${article.name} - ${article.username}`}</Divider>
+      <Grid container sx={makeStyles.contentPosts}>{renderPosts()}</Grid>
+    </>
   );
 };
 

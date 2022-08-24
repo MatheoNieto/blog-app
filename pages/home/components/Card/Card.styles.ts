@@ -1,20 +1,26 @@
-export const makeStyles ={
+export const makeStyles = {
   container: {
     width: 345,
-    margin: 2
+    margin: 2,
   },
-  infoAuthor:{
+  infoAuthor: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 1
+    padding: 1,
   },
-  imageAuthor: {
-    marginRight: 2,
+  titlePost:{
+    fontWeight: 'bold',
+    fontSize: 16,
+    textAlign: 'center',
   },
-  infoArticle:{
+  infoPost:{
+    fontSize: 14,
+    textAlign: 'justify',
+  },
+  contentPosts: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'space-around',
-    padding: 0
-  }
-}
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+  },
+};

@@ -1,21 +1,24 @@
 import type {NextPage} from 'next';
-import {Grid} from '@mui/material';
+import {Box} from '@mui/material';
 
 import {Card} from './components/Card';
-import {data} from './mock/articles';
 import {Layout} from '../../components/Layout';
+import {Posts} from '../../models';
+import {useGetPosts} from '../../core/hooks/getPosts';
 
 const Home: NextPage = () => {
+  const {data: listPosts} = useGetPosts();
+
   const renderArticles = () => {
-    return data.map((article, index) => (
-      <Card key={`${article.id}-${index}`} article={article} />
+    return listPosts?.map((post: Posts, index: number) => (
+      <Card key={`${post.id}-${index}`} article={post} />
     ));
   };
 
   return (
     <>
       <Layout titleHeader="Welcome to favorite blog" createPost={true}>
-        <Grid container> {renderArticles()}</Grid>
+        <Box component="main"> {renderArticles()}</Box>
       </Layout>
     </>
   );
