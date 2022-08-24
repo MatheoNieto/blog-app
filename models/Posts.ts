@@ -8,11 +8,10 @@ export type RequestPostsType = {
   body: string;
 };
 
-type PostsType =  RequestPostsType &{
-    comments: CommentType[];
-}
+export type PostsType = RequestPostsType & {
+  comments: CommentType[];
+};
 
 export type Posts = UserType & {
   posts: PostsType[];
 };
-
