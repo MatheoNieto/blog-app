@@ -1,7 +1,7 @@
 import {useRouter} from 'next/router';
 import type {NextPage} from 'next';
-import {Box, Container, Typography} from '@mui/material';
-import {Header} from '../../components/Header';
+import {Container, Typography} from '@mui/material';
+import {Layout} from '../../components/Layout';
 
 const Article: NextPage = () => {
   const router = useRouter();
@@ -9,13 +9,12 @@ const Article: NextPage = () => {
 
   return (
     <>
-      <Header title="title article" />
-      <Container maxWidth="md">
-        <Box component="div" sx={{p: 20, height: '100vh'}}>
+      <Layout titleHeader="title article">
+        <Container maxWidth="md">
           <Typography component="h1">Title</Typography>
           <Typography>Title</Typography>
-        </Box>
-      </Container>
+        </Container>
+      </Layout>
     </>
   );
 };

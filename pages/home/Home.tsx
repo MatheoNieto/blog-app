@@ -1,9 +1,9 @@
 import type {NextPage} from 'next';
-import {Box, Grid} from '@mui/material';
-import {makeStyles} from './Home.styles';
+import {Grid} from '@mui/material';
+
 import {Card} from './components/Card';
 import {data} from './mock/articles';
-import {Header} from '../../components/Header';
+import {Layout} from '../../components/Layout';
 
 const Home: NextPage = () => {
   const renderArticles = () => {
@@ -14,10 +14,9 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Header title="Welcome to favorite blog" createPost={true} />
-      <Box component="div" sx={makeStyles.contentBody}>
+      <Layout titleHeader="Welcome to favorite blog" createPost={true}>
         <Grid container> {renderArticles()}</Grid>
-      </Box>
+      </Layout>
     </>
   );
 };

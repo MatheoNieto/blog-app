@@ -9,7 +9,7 @@ import {
   Grid,
   Alert,
 } from '@mui/material';
-import {Header} from '../../components/Header';
+import {Layout} from '../../components/Layout';
 import Link from 'next/link';
 
 const CreateArticle: NextPage = () => {
@@ -38,74 +38,71 @@ const CreateArticle: NextPage = () => {
   };
 
   return (
-    <>
-      <Header title="Writing a blog" />
+    <Layout titleHeader="Writing a blog">
       <Container maxWidth="md">
-        <Box component="div" sx={{p: 20, height: '100vh'}}>
-          {error && (
-            <Alert variant="outlined" severity="error" sx={{marginBottom: 2}}>
-              {error}
-            </Alert>
-          )}
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': {m: 1, width: '100%'},
-            }}
-            noValidate
-            autoComplete="off">
-            <Divider>Info Blog</Divider>
-            <TextField
-              label="Title"
-              onChange={event => setTitle(event.target.value)}
-              required
-            />
-            <TextField
-              label="Description"
-              onChange={event => setDescription(event.target.value)}
-              multiline
-              required
-            />
+        {error && (
+          <Alert variant="outlined" severity="error" sx={{marginBottom: 2}}>
+            {error}
+          </Alert>
+        )}
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': {m: 1, width: '100%'},
+          }}
+          noValidate
+          autoComplete="off">
+          <Divider>Info Blog</Divider>
+          <TextField
+            label="Title"
+            onChange={event => setTitle(event.target.value)}
+            required
+          />
+          <TextField
+            label="Description"
+            onChange={event => setDescription(event.target.value)}
+            multiline
+            required
+          />
 
-            <Divider>Author</Divider>
-            <TextField
-              label="Name"
-              onChange={event => setName(event.target.value)}
-              required
-            />
-            <TextField
-              label="Last name"
-              onChange={event => setLastName(event.target.value)}
-              required
-            />
-            <TextField
-              label="Email"
-              onChange={event => setEmail(event.target.value)}
-              required
-            />
-            <TextField
-              label="Link image profile"
-              onChange={event => setImageProfile(event.target.value)}
-              required
-            />
-            <Grid
-              container
-              sx={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
-              <Link href="/">
-                <Button variant="outlined">Back</Button>
-              </Link>
-              <Button variant="contained" onClick={handleCreate}>
-                Create post
-              </Button>
-            </Grid>
-          </Box>
+          <Divider>Author</Divider>
+          <TextField
+            label="Name"
+            onChange={event => setName(event.target.value)}
+            required
+          />
+          <TextField
+            label="Last name"
+            onChange={event => setLastName(event.target.value)}
+            required
+          />
+          <TextField
+            label="Email"
+            onChange={event => setEmail(event.target.value)}
+            required
+          />
+          <TextField
+            label="Link image profile"
+            onChange={event => setImageProfile(event.target.value)}
+            required
+          />
+          <Grid
+            container
+            sx={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Link href="/">
+              <Button variant="outlined">Back</Button>
+            </Link>
+            <Button variant="contained" onClick={handleCreate}>
+              Create post
+            </Button>
+          </Grid>
         </Box>
       </Container>
-    </>
+    </Layout>
   );
 };
 
