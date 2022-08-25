@@ -5,3 +5,8 @@ export type CommentType = {
   email: string;
   body: string;
 };
+export type CommentTemporalType = {
+  name: string;
+  email: string;
+  body: string;
+};

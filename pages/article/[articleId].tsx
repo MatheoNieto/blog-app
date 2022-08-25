@@ -5,6 +5,7 @@ import {Container, Typography, Divider, Grid, Box} from '@mui/material';
 import {Layout} from '../../components/Layout';
 import {useGetPosts} from '../../core/hooks/getDetailPost';
 import {makeStyles} from './styles';
+import {CommentsComponent} from './components/Comments';
 
 const Article: NextPage = () => {
   const router = useRouter();
@@ -64,7 +65,10 @@ const Article: NextPage = () => {
           <Typography>{detailPost.post.body}</Typography>
 
           <Divider>Comments</Divider>
-          <Grid>{renderComments()}</Grid>
+          <Grid>
+            <CommentsComponent />
+            {renderComments()}
+          </Grid>
           <Divider>Information of the user</Divider>
           <Grid>{renderInfoUser()}</Grid>
         </Container>
