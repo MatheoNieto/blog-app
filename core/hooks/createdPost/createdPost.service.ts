@@ -4,5 +4,5 @@ import {PostCreatedType, RequestPostsType} from '../../../models';
 
 export const createdPost = async (dataPost: PostCreatedType):Promise<RequestPostsType> => {
   const createdPostPetition = await generalRequest.post(endPoints.posts, dataPost);
-  return Promise.resolve(createdPostPetition.data);
+  return Promise.resolve(createdPostPetition);
 };

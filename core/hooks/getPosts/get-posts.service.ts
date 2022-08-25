@@ -1,6 +1,6 @@
 import generalRequest from '../../services/general-request.service';
 import {endPoints} from '../../../shared/endPoints';
-import {UserType, RequestPostsType, Posts, CommentType} from '../../../models';
+import {UserType, RequestPostsType, Posts} from '../../../models';
 
 export const getPosts = async (): Promise<Posts[]> => {
   const users: UserType[] = await generalRequest.get(endPoints.getUsers);
@@ -14,22 +14,7 @@ export const getPosts = async (): Promise<Posts[]> => {
 
       return {
         ...user,
-        posts: await Promise.all(
-          postsUser.map(async post => {
-            const endPointComments = endPoints.getComments.replace(
-              ':id',
-              `${post.id}`,
-            );
-            const commentsPosts: CommentType[] = await generalRequest.get(
-              endPointComments,
-            );
-
-            return {
-              ...post,
-              comments: commentsPosts,
-            };
-          }),
-        ),
+        posts: postsUser,
       };
     }),
   );

@@ -20,7 +20,7 @@ const CardComponent: FC<CardProps> = ({article}) => {
   const renderPosts = () => {
     return article.posts.map((post, index) => (
       <Card key={`${post.id}-${index}`} sx={makeStyles.container}>
-        <Link href={`/article/${post.id}-${article.id}`}>
+        <Link href={`/article/${post.id}`}>
           <CardActionArea>
             <CardContent>
               <Typography sx={makeStyles.titlePost}>{post.title}</Typography>

@@ -19,5 +19,8 @@ export type PostsType = RequestPostsType & {
 };
 
 export type Posts = UserType & {
-  posts: PostsType[];
+  posts: RequestPostsType[];
+};
+export type PostsDetailType = UserType & {
+  post: PostsType;
 };

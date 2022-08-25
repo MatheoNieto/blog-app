@@ -24,9 +24,9 @@ const CreateArticle: NextPage = () => {
   const [error, setError] = useState<string | undefined>();
   const {mutate: addPost} = useCreatedPost(
     (data: RequestPostsType) =>
-      Router.push(`/article/${data.id}-${userDefaultCreated}`),
-    () => {
-      setError('Error creating the post, please try again');
+      Router.push(`/article/${data.id}`),
+    error => {
+      setError(error);
       setTimeout(() => setError(undefined), 2000);
     },
   );

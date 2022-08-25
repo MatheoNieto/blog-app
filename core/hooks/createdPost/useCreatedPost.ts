@@ -3,7 +3,7 @@ import {createdPost} from './createdPost.service';
 
 export const useCreatedPost = (
   onSettled?: (data) => void,
-  onError?: () => void,
+  onError?: (error) => void,
 ) => {
   return useMutation(createdPost, {
     onSettled,
