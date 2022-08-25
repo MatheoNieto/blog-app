@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Router from 'next/router';
 import type {NextPage} from 'next';
 import {
   Box,
@@ -11,30 +12,36 @@ import {
 } from '@mui/material';
 import {Layout} from '../../components/Layout';
 import Link from 'next/link';
+import {useCreatedPost} from '../../core/hooks/createdPost/useCreatedPost';
+import {RequestPostsType} from '../../models';
+
+const userDefaultCreated = 1;
 
 const CreateArticle: NextPage = () => {
   const [title, setTitle] = useState<string | undefined>();
   const [description, setDescription] = useState<string | undefined>();
 
-  const [name, setName] = useState<string | undefined>();
-  const [lastName, setLastName] = useState<string | undefined>();
-  const [email, setEmail] = useState<string | undefined>();
-  const [imageProfile, setImageProfile] = useState<string | undefined>();
-
   const [error, setError] = useState<string | undefined>();
+  const {mutate: addPost} = useCreatedPost(
+    (data: RequestPostsType) =>
+      Router.push(`/article/${data.id}-${userDefaultCreated}`),
+    () => {
+      setError('Error creating the post, please try again');
+      setTimeout(() => setError(undefined), 2000);
+    },
+  );
 
   const handleCreate = () => {
-    if (
-      !title ||
-      !description ||
-      !name ||
-      !lastName ||
-      !email ||
-      !imageProfile
-    ) {
+    if (!title || !description) {
       setError('Are required all fields');
       setTimeout(() => setError(undefined), 1000);
+      return;
     }
+    addPost({
+      body: description,
+      title: title,
+      userId: userDefaultCreated,
+    });
   };
 
   return (
@@ -65,27 +72,6 @@ const CreateArticle: NextPage = () => {
             required
           />
 
-          <Divider>Author</Divider>
-          <TextField
-            label="Name"
-            onChange={event => setName(event.target.value)}
-            required
-          />
-          <TextField
-            label="Last name"
-            onChange={event => setLastName(event.target.value)}
-            required
-          />
-          <TextField
-            label="Email"
-            onChange={event => setEmail(event.target.value)}
-            required
-          />
-          <TextField
-            label="Link image profile"
-            onChange={event => setImageProfile(event.target.value)}
-            required
-          />
           <Grid
             container
             sx={{

@@ -8,6 +8,12 @@ export type RequestPostsType = {
   body: string;
 };
 
+export type PostCreatedType = {
+  userId: number;
+  title: string;
+  body: string;
+}
+
 export type PostsType = RequestPostsType & {
   comments: CommentType[];
 };

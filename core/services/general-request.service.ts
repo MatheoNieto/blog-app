@@ -18,6 +18,11 @@ class GeneralRequestService {
     const response = await this.httpService.get(endpoint);
     return response.data;
   }
+
+  async post(endpoint: string, data: unknown) {
+    const response = await this.httpService.post(endpoint, data);
+    return response.data;
+  }
 }
 
 export default GeneralRequestService.getInstance();
