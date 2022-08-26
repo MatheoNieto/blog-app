@@ -65,8 +65,8 @@ const Article: NextPage = () => {
           <Typography component="h1">{detailPost.post.title}</Typography>
           <Typography>{detailPost.post.body}</Typography>
 
-          <Divider>Comments</Divider>
           <Grid>
+            <Divider></Divider>
             <CommentsComponent />
             {renderComments()}
           </Grid>

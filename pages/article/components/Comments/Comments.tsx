@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Grid, TextField, Button, Alert, Box, Typography} from '@mui/material';
+import {Grid, TextField, Button, Alert, Box, Typography, Divider} from '@mui/material';
 import {CommentTemporalType} from '../../../../models';
 import {makeStyles} from '../../styles';
 
@@ -51,28 +51,45 @@ const Comments = () => {
           {error}
         </Alert>
       )}
-      <Grid sx={{p: 2}}>
-        <TextField
-          label="comment"
-          variant="standard"
-          onChange={event => setComment(event.target.value)}
-          multiline
-        />
-        <TextField
-          label="name"
-          variant="standard"
-          onChange={event => setName(event.target.value)}
-        />
-        <TextField
-          label="email"
-          variant="standard"
-          onChange={event => setEmail(event.target.value)}
-        />
+      <Box
+        component="form"
+        sx={{
+          padding: 2,
+          borderRadius: 10,
+          marginBottom: 1,
+          '& .MuiTextField-root': {m: 1},
+        }}
+        noValidate
+        autoComplete="off">
+        <Grid
+          sx={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <TextField
+            label="comment"
+            variant="standard"
+            onChange={event => setComment(event.target.value)}
+            multiline
+          />
+          <TextField
+            label="name"
+            variant="standard"
+            onChange={event => setName(event.target.value)}
+          />
+          <TextField
+            label="email"
+            variant="standard"
+            onChange={event => setEmail(event.target.value)}
+          />
 
-        <Button variant="contained" onClick={handleCreate}>
-          send
-        </Button>
-      </Grid>
+          <Button variant="contained" onClick={handleCreate}>
+            publish comment
+          </Button>
+        </Grid>
+      </Box>
+      <Divider>Comments</Divider>
 
       {renderComments()}
     </>
