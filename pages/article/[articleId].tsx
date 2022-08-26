@@ -6,18 +6,19 @@ import {Layout} from '../../components/Layout';
 import {useGetPosts} from '../../core/hooks/getDetailPost';
 import {makeStyles} from './styles';
 import {CommentsComponent} from './components/Comments';
+import {Spinner} from '../../components/Spinner';
 
 const Article: NextPage = () => {
   const router = useRouter();
   const {articleId} = router.query;
-  const {data: detailPost, refetch} = useGetPosts(articleId);
+  const {data: detailPost, refetch, isLoading} = useGetPosts(articleId);
 
   useEffect(() => {
     setTimeout(() => refetch(), 500);
   }, [articleId, refetch]);
 
-  if (!detailPost) {
-    return <Typography component="h1">loading</Typography>;
+  if (!detailPost && isLoading) {
+    return <Spinner />;
   }
 
   const renderComments = () => {
