@@ -17,7 +17,7 @@ const Article: NextPage = () => {
     setTimeout(() => refetch(), 500);
   }, [articleId, refetch]);
 
-  if (!detailPost && isLoading) {
+  if (!detailPost || isLoading) {
     return <Spinner />;
   }
 
