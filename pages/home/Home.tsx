@@ -1,5 +1,5 @@
 import type {NextPage} from 'next';
-import {Box} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 
 import {Card} from './components/Card';
 import {Layout} from '../../components/Layout';
@@ -18,7 +18,10 @@ const Home: NextPage = () => {
   return (
     <>
       <Layout titleHeader="Welcome to favorite blog" createPost={true}>
-        <Box component="main"> {renderArticles()}</Box>
+        <Box component="main">
+          <Typography variant="h3" gutterBottom>Report </Typography>
+          {renderArticles()}
+        </Box>
       </Layout>
     </>
   );

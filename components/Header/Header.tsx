@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {Typography, AppBar, Grid, Button} from '@mui/material';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 type HeaderProps = {
   title: string;
@@ -22,19 +23,29 @@ const makeStyles = {
 };
 
 const Header: FC<HeaderProps> = ({title, createPost}) => {
+  const router = useRouter();
+
   return (
     <AppBar component="nav">
       <Grid container sx={makeStyles.contentHeader}>
-        <Typography variant="h6" component="div" sx={makeStyles.titleHeader}>
+        <Typography variant="h3" sx={makeStyles.titleHeader}>
           {title}
         </Typography>
 
-        {createPost && (
-          <Link href="/create-article">
-            <Button variant="contained" color="secondary">
-              Create your post
-            </Button>
-          </Link>
+        {createPost ? (
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => router.push('/create-article')}>
+            Create your post
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => router.back()}>
+            Back
+          </Button>
         )}
       </Grid>
     </AppBar>

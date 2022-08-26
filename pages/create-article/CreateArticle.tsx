@@ -9,11 +9,14 @@ import {
   Button,
   Grid,
   Alert,
+  CircularProgress,
 } from '@mui/material';
+import {green} from '@mui/material/colors';
 import {Layout} from '../../components/Layout';
-import Link from 'next/link';
 import {useCreatedPost} from '../../core/hooks/createdPost/useCreatedPost';
 import {RequestPostsType} from '../../models';
+import SaveIcon from '@mui/icons-material/Save';
+import CheckIcon from '@mui/icons-material/Check';
 
 const userDefaultCreated = 1;
 
@@ -22,14 +25,27 @@ const CreateArticle: NextPage = () => {
   const [description, setDescription] = useState<string | undefined>();
 
   const [error, setError] = useState<string | undefined>();
-  const {mutate: addPost} = useCreatedPost(
+  const {
+    mutate: addPost,
+    isLoading,
+    isSuccess,
+  } = useCreatedPost(
     (data: RequestPostsType) =>
-      Router.push(`/article/${data.id}`),
+      setTimeout(() => Router.push(`/article/${data.id}`), 500),
     error => {
       setError(error);
       setTimeout(() => setError(undefined), 2000);
     },
   );
+
+  const buttonSx = {
+    ...(isSuccess && {
+      bgcolor: green[500],
+      '&:hover': {
+        bgcolor: green[700],
+      },
+    }),
+  };
 
   const handleCreate = () => {
     if (!title || !description) {
@@ -77,14 +93,30 @@ const CreateArticle: NextPage = () => {
             sx={{
               flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: 'space-between',
+              justifyContent: 'center',
             }}>
-            <Link href="/">
-              <Button variant="outlined">Back</Button>
-            </Link>
-            <Button variant="contained" onClick={handleCreate}>
-              Create post
-            </Button>
+            <Box sx={{m: 1, position: 'relative'}}>
+              <Button
+                variant="contained"
+                sx={buttonSx}
+                disabled={isLoading}
+                onClick={handleCreate}>
+                Publish post {!isSuccess ? <SaveIcon /> : <CheckIcon />}
+              </Button>
+              {isLoading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: green[500],
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    marginTop: '-12px',
+                    marginLeft: '-12px',
+                  }}
+                />
+              )}
+            </Box>
           </Grid>
         </Box>
       </Container>
